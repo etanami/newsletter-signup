@@ -61,13 +61,7 @@ app.post('/failure', (req, res) => {
     res.redirect('/');
 })
 
-app.listen(3000, ()=> {
+app.listen(process.env.PORT || 3000, ()=> {
     console.log('Server listening on port 3000!');
 })
 
-
-// MailChimp Api key
-// 7e495aad59fdbc9ee0ccd09d1e8341ee-us17
-
-// list ID
-// d978f7f85e
