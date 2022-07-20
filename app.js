@@ -2,6 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const https = require('https');
+require("dotenv").config();
+
+const MAPI_KEY = process.env.API_KEY;
+const MLIST_ID = process.env.LIST_ID;
+const MAPI_SERVER = process.env.API_SERVER;
 
 const app = express();
 
@@ -33,10 +38,10 @@ app.post('/', (req, res) => {
 
     const jsonData = JSON.stringify(data);
 
-    const url = 'https://us17.api.mailchimp.com/3.0/lists/d978f7f85e';
+    const url = `https://${MAPI_SERVER}.api.mailchimp.com/3.0/lists/${MLIST_ID}`;
     const options = {
         mehod: 'POST',
-        auth: 'etanamie:7e495aad59fdbc9ee0ccd09d1e8341ee-us17'
+        auth: "etanamie:" + MAPI_KEY + "-" + MAPI_SERVER
     }
 
     const request = https.request(url, options, (response) => {
@@ -62,6 +67,6 @@ app.post('/failure', (req, res) => {
 })
 
 app.listen(process.env.PORT || 3000, ()=> {
-    console.log('Server listening on port 3000!');
+    console.log('Server listening on port!');
 })
 
